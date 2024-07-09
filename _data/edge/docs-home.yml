@@ -36,6 +36,7 @@ toc:
     - title: Queues
       path: /docs/edge/rule-engine/queues/
 - title: Integrations
+  pe: true
   section:
   - title: Overview
     path: /docs/pe/edge/user-guide/integrations/
@@ -53,7 +54,6 @@ toc:
     path: /docs/pe/edge/user-guide/integrations/tcp/
   - title: UDP
     path: /docs/pe/edge/user-guide/integrations/udp/
-
 - title: Security
   section:
     - title: Edge over TLS/SSL 

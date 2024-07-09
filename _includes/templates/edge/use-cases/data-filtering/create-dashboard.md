@@ -4,4 +4,4 @@ Please open **ThingsBoard** to create a new dashboard:
 
 {% include images-gallery.html imageCollection="createDashboard" showListImageTitles="true" %}
 
-<b>Congratulations!</b> You have successfully sent telemetry from the device, saved it on the edge, pushed filtered data to the cloud, and visualized it on the dashboard.
+**Congratulations!** You have successfully sent telemetry from the device, saved it on the edge, pushed filtered data to the cloud, and visualized it on the dashboard.
