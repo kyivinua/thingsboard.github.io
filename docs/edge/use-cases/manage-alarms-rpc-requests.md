@@ -61,16 +61,16 @@ provisionDevicesEdge:
         title: 'Input device name. For example, "DHT22". Select "edge thermostat" from device profiles list. No other changes required at this time. Click "Add" to add the device.'
     3:
         image: /images/edge/use-cases/manage-alarms/provision-devices-item-4.png
-        title: 'Now your "DHT22" device should be listed first, since table sort devices using created time by default. Click "Add" to add one more device.'
+        title: 'Now your "DHT22" device should be listed first, since table sort devices using created time by default.'
     4:
         image: /images/edge/use-cases/manage-alarms/provision-devices-item-5.png
-        title: 'Input device name. For example, "Air Conditioner". No other changes required at this time. Click "Add" to add the device.'
+        title: 'To add more devices, click "+" then "Add new device".'
     5:
         image: /images/edge/use-cases/manage-alarms/provision-devices-item-6.png
-        title: 'Now your "Air Conditioner" device should be listed first, since table sort devices using created time by default.'
+        title: 'Input device name. For example, "Air Conditioner". No other changes required at this time. Click "Add" to add the device.'
     6:
         image: /images/edge/use-cases/manage-alarms/provision-devices-item-7.png
-        title: 'Click on "DHT22" device row to open device details and navigate to "Relations" tab. Click "+" icon to add new relation.'
+        title: 'Now your "Air Conditioner" device should be listed first, since table sort devices using created time by default.'
     7:
         image: /images/edge/use-cases/manage-alarms/provision-devices-item-8.png
         title: 'Specify relation type "Manages" and select "Air Conditioner" device from the list. Click "Add" to add this relation. Now we verify that devices were provisioned to cloud.'
@@ -102,7 +102,7 @@ updateRootRuleChain:
         title: 'Filter node by "script" word and drag script node (Transformation) to rule chain.'
     3:
         image: /images/edge/use-cases/manage-alarms/update-root-item-4.png
-        title: 'Input node name and add <b>JavaScript</b> code (you can copy and paste it from the snippet above) to create proper <b>enable</b> command for Air Conditioner device. Click "Add" to proceed.'
+        title: 'Input node name and add <b>TBEL</b> script language code (you can copy and paste it from the snippet above) to create proper <b>enable</b> command for Air Conditioner device. Click "Add" to proceed.'
     4:
         image: /images/edge/use-cases/manage-alarms/update-root-item-5.png
         title: 'Drag connection from "Device Profile Node" to newly added <b>enabled</b> script node.'
@@ -129,9 +129,6 @@ updateRootRuleChainEdge:
     1:
         image: /images/edge/use-cases/manage-alarms/update-root-item-12.png
         title: 'Open "Edge root rule chain" to verify changes.'
-    2:
-        image: /images/edge/use-cases/manage-alarms/update-root-item-13.png
-        title: 'Verify that rule chain is the same as you have updated on cloud.'
 
 copyAccessTokenAirConditioner:
     0:
