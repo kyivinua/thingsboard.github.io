@@ -2,30 +2,31 @@
 {:toc}
 
 ## Overview
+Starting with ThingsBoard 3.3, the platform supports uploading and distributing over-the-air (OTA) updates to devices.
 
-Since ThingsBoard 3.3, ThingsBoard allows you to upload and distribute over-the-air(OTA) updates to devices. 
-As a tenant administrator, you may upload firmware or software packages to the OTA repository. 
-Once uploaded, you may assign them to [Device Profile](/docs/{{docsPrefix}}user-guide/device-profiles/) or [Device](/docs/{{docsPrefix}}user-guide/ui/devices/). 
-ThingsBoard will notify devices about the available update and provide a protocol-specific API to download the firmware. 
-The platform tracks status of the update and stores history of the updates. 
-As a platform user, you may monitor the update process using the dashboard.
+As a tenant administrator, you can upload firmware or software packages to the OTA repository. Once the packages are uploaded, you can assign them to either a Device Profile or a specific Device.
+
+ThingsBoard will notify the devices about the available updates and offer a protocol-specific API for downloading the firmware. The platform also tracks the update status and maintains a history of all updates.
+
+As a platform user, you can track the progress of updates through the dashboard.
+<br>
 <br>
 <object data="/images/user-guide/firmware/firmware-anim3.svg"></object>
 <br>
 
 ## Provision OTA package to ThingsBoard repository
 
-Navigate to the "OTA Updates" menu item to list and upload OTA update packages. Each package consist of:
+Navigate to the "OTA Updates" menu to view and upload OTA update packages. Each package consists of:
 
-* Title - the name of your package. You can use different names for production and debug firmware/software. 
-* Version - the version of your package. Combination of the title and version must be unique in scope of a tenant.
-* Device Profile - each package is compatible with one device profile. We track compatibility to prevent accidental updates of devices with incompatible firmware/software. 
+* **Title** - the name of your package. You can use different names for production and debug firmware/software. 
+* **Version** - the version of your package. Combination of the title and version must be unique in scope of a tenant.
+* **Device Profile** - each package is compatible with one device profile. We track compatibility to prevent accidental updates of devices with incompatible firmware/software. 
   Link to a device profile means that device that use this profile *may* be updated to the current package. 
   However, the update is not triggered, until the user or script [assigns](#assign-ota-package-to-device-profile) the package to the device profile or device.
-* Type - can be either *Firmware* or *Software*.    
-* Checksum algorithm - optional parameter, it is a short name of the checksum algorithm to use. 
-* Checksum - optional parameter, it's a value of the file checksum. If no checksum provided by the user, server will use SHA-256 algorithm automatically.
-* Description - optional text description of the firmware. 
+* **Type** - can be either *Firmware* or *Software*.    
+* **Checksum** algorithm - optional parameter, it is a short name of the checksum algorithm to use. 
+* **Checksum** - optional parameter, it's a value of the file checksum. If no checksum provided by the user, server will use SHA-256 algorithm automatically.
+* **Description** - optional text description of the firmware. 
 
 {% include images-gallery.html imageCollection="createFirmware" %}
 
@@ -90,15 +91,17 @@ ThingsBoard queues the update notifications to avoid peak loads. The queue is pr
 By default, it is configured to notify up to 100 device per minute. See [configuration properties](/docs/{{docsPrefix}}user-guide/ota-updates/#queue-processing-pace) for more details.
    
 ### INITIATED state
+Indicates that the notification about firmware or software has been fetched from the queue and pushed to the device. 
+Internally, ThingsBoard converts this notification into an update for the following shared attributes:
 
 Means that the notification about firmware/software is fetched from queue and pushed to device.
 Under the hood, ThingsBoard converts notification to the update of the following [shared attributes](/docs/{{docsPrefix}}user-guide/attributes/#shared-attributes):
 
-- fw(sf)_title - name of the firmware (software).
-- fw(sf)_version - version of the firmware (software).
-- fw(sf)_size - size of the firmware (software) file in bytes.
-- fw(sf)_checksum - attribute that is used to verify integrity of the received file.
-- fw(sf)_checksum_algorithm - the algorithm used to calculate file checksum.
+- **fw(sf)_title** - name of the firmware (software).
+- **fw(sf)_version** - version of the firmware (software).
+- **fw(sf)_size** - size of the firmware (software) file in bytes.
+- **fw(sf)_checksum** - attribute that is used to verify integrity of the received file.
+- **fw(sf)_checksum_algorithm** - the algorithm used to calculate file checksum.
 
 {% include images-gallery.html imageCollection="fw-attributes" %}
 
@@ -111,12 +114,12 @@ The remaining states are reported by the device firmware/software that is curren
 We have prepared description of those states and sample applications for the most popular protocols written in python. 
 Sample applications simulate behavior of the device firmware/software and may used as a reference for the implementation.  
 
- * DOWNLOADING - notification about new firmware/software update was received and device started downloading the update package.
- * DOWNLOADED - device completed downloading of the update package.
- * VERIFIED - device verified the checksum of the downloaded package.
- * UPDATING - device started the firmware/software update. Typically is sent before reboot of the device or restart of the service. 
- * UPDATED - the firmware was successfully updated to the next version.
- * FAILED - checksum wasn't verified, or the device failed to update. See "Device failed" tab on the Firmware dashboard for more details.
+ * **DOWNLOADING** - notification about new firmware/software update was received and device started downloading the update package.
+ * **DOWNLOADED** - device completed downloading of the update package.
+ * **VERIFIED** - device verified the checksum of the downloaded package.
+ * **UPDATING** - device started the firmware/software update. Typically is sent before reboot of the device or restart of the service. 
+ * **UPDATED** - the firmware was successfully updated to the next version.
+ * **FAILED** - checksum wasn't verified, or the device failed to update. See "Device failed" tab on the Firmware dashboard for more details.
 
 
 Once the firmware/software is updated, ThingsBoard expect the device to send the following telemetry:
@@ -179,7 +182,7 @@ There you can see a list of all devices with full information about their softwa
 
 ### Configuration
 
-##### Queue processing pace
+##### Queue processing rate
 
 To set the max number of devices that will be notified in the chosen time period using the following [configuration](/docs/user-guide/install/{{docsPrefix}}config/) properties:
 
@@ -191,6 +194,6 @@ export TB_QUEUE_CORE_FW_PACK_SIZE=100
 
 ##### Max size setting
 
-By default, the maximum size of firmware that we can save in database is 2 gb. It can not be configured.
+By default, the maximum size of firmware that can be stored in the database is 2 GB, and this limit cannot be configured.
 
 {% endif %}
